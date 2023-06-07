@@ -16,3 +16,23 @@ df.shape
 df.info()
 train = pd.read_csv("dataset_train_validation.csv.zip")
 test = pd.read_csv("dataset_test.csv.zip")
+columns =  [col for col in test.columns if col not in ['company', 'age', 'market', 'TARGET']]
+submission = test[columns]
+solucion = test['TARGET']
+def filter_rows_by_values(df, col, values):
+    return df[~df[col].isin(values)]
+
+train = filter_rows_by_values(train, "TARGET", ["null"])
+def relative_strength_idx(df, n=14):
+    close = df['close']
+    delta = close.diff()
+    delta = delta[1:]
+    pricesUp = delta.copy()
+    pricesDown = delta.copy()
+    pricesUp[pricesUp < 0] = 0
+    pricesDown[pricesDown > 0] = 0
+    rollUp = pricesUp.rolling(n).mean()
+    rollDown = pricesDown.abs().rolling(n).mean()
+    rs = rollUp / rollDown
+    rsi = 100.0 - (100.0 / (1.0 + rs))
+    return rsi
