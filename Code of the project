@@ -1,0 +1,14 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+import os
+import numpy as np
+import time
+from sklearn.linear_model import LinearRegression
+import math
+from sklearn.metrics import accuracy_score
+from sklearn.model_selection import GroupKFold, RepeatedStratifiedKFold, cross_validate, StratifiedShuffleSplit
+from sklearn import metrics
+from sklearn.neural_network import MLPClassifier
+df = pd.read_csv('dataset_test.csv.zip')
+df.head()
