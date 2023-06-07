@@ -12,3 +12,7 @@ from sklearn import metrics
 from sklearn.neural_network import MLPClassifier
 df = pd.read_csv('dataset_test.csv.zip')
 df.head()
+df.shape
+df.info()
+train = pd.read_csv("dataset_train_validation.csv.zip")
+test = pd.read_csv("dataset_test.csv.zip")
